@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Müzik";
+}
+@model EgitimPlatformu.Controllers.AnasayfaDTO
+<section id="contentbody">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <div class="row">
+                    <div class="leftbar_content">
+                        <h2>MÜZİK</h2>
+                        <div class="label-primary" style="padding:2%">
+                            <form class="label" style="font-size:medium;" action="~/Konular/Muzik" method="post">
+                                Öğrenme metodunuzu seçin:<br />
+                                @foreach (var i in Model.anlatim)
+                                {
+                                    <input type="radio" class="radio-inline" name="anlatimsekli" value="@i.AnlatimSekliAdi" /> @i.AnlatimSekliAdi.ToString()
+                                }
+
+                                <input class="btn btn-default" type="submit" value="Seç" />
+                            </form>
+                        </div>
+                            <h2>En Yeni <u>@ViewBag.Tur</u> İçerikler</h2>
+
+
+                            @foreach (var item in Model.icerik)
+                            {
+
+                                <div class="single_stuff wow fadeInDown">
+                                    <div class="single_stuff_img"> <a href="#"><img src="~/images/arkaplan.jpg" alt="" style="width:100%"></a> </div>
+                                    <div class="single_stuff_article">
+                                        <div class="single_sarticle_inner">
+                                            <a class="stuff_category" href="#"><b>Konu:</b> @item.Konular.KonuAdi </a>
+                                            <div class="stuff_article_inner">
+                                                <span class="stuff_date"> @item.GonderimTarihi.Value.Month / <strong>@item.GonderimTarihi.Value.Day</strong></span>
+                                                <h2><a href="~/Home/Icerik?id=@item.IcerikId">@item.IcerikAd</a></h2>
+                                                <p>
+                                                    @if (item.Aciklama.Length >= 200)
+                                                    {
+                                                        @item.Aciklama.Substring(0, 200)
+                                                    }
+                                                    else
+                                                    { @item.Aciklama }
+                                                </p>
+                                                <b>Anlatım Şekli:</b> @item.AnlatimSekilleri.AnlatimSekliAdi | <b>Yazar:</b> @item.Kullanicilar.KullaniciAdi
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="row">
+                    <div class="rightbar_content">
+                        <div class="single_blog_sidebar wow fadeInUp">
+                            <h2>Reklamlar</h2>
+                            <ul class="featured_nav">
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Üyeler";
+}
+
+
+@model EgitimPlatformu.Controllers.AnasayfaDTO
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>İçerikler</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Parola</th>
+                        <th>Ad Soyad</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Roller</th>
+                        <th>Son Gönderi</th>
+                        <th>Düzenle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.kullanici)
+                    {
+                    <tr>
+                        <td>@item.KullaniciID</td>
+                        <td>@item.KullaniciAdi</td>
+                        <td>@item.Parola</td>
+                        <td>@item.AdSoyad</td>
+                        <td>@item.OlusturulmaTarihi.Value.ToShortDateString()</td>
+                        <td>@foreach (var i in item.KullaniciRol)
+                        {
+                            @i.Roller.RolAdi
+                        }
+                        </td>
+                        <td>@*@item.Icerikler.Last().IcerikAd*@ </td>
+                        <td><a href="~/admin/Uyeler" class="form-control btn btn-warning">Düzenle</a></td>
+                        <td>
+                            @* <a href="~/admin/IcerikSil?id=@item.IcerikId" class="form-control btn btn-danger">Sil</a>*@
+
+                            <form action="~/admin/Uyeler" method="post">
+                                <input type="hidden" name="kullaniciID" value="@item.KullaniciID" />
+                                <input type="submit" value="Sil" class="form-control btn btn-danger" />
+                                
+                            </form>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+</div>

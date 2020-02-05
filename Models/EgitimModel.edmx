@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="melihcelenkmainModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnlatimSekilleri">
+          <Key>
+            <PropertyRef Name="AnlatimSekliId" />
+          </Key>
+          <Property Name="AnlatimSekliId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnlatimSekliAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Icerikler">
+          <Key>
+            <PropertyRef Name="IcerikId" />
+          </Key>
+          <Property Name="IcerikId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IcerikAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="Aciklama" Type="text" />
+          <Property Name="GonderimTarihi" Type="datetime" />
+          <Property Name="KonuId" Type="int" />
+          <Property Name="AnlatimSekliId" Type="int" />
+          <Property Name="KullaniciID" Type="int" />
+        </EntityType>
+        <EntityType Name="Konular">
+          <Key>
+            <PropertyRef Name="KonuId" />
+          </Key>
+          <Property Name="KonuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KonuAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="30" />
+          <Property Name="Parola" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdSoyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="OlusturulmaTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="KullaniciRol">
+          <Key>
+            <PropertyRef Name="KullaniciRolID" />
+          </Key>
+          <Property Name="KullaniciRolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="RolID" Type="int" />
+        </EntityType>
+        <EntityType Name="Roller">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RolAdi" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Icerikler_AnlatimSekilleri">
+          <End Role="AnlatimSekilleri" Type="Self.AnlatimSekilleri" Multiplicity="0..1" />
+          <End Role="Icerikler" Type="Self.Icerikler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnlatimSekilleri">
+              <PropertyRef Name="AnlatimSekliId" />
+            </Principal>
+            <Dependent Role="Icerikler">
+              <PropertyRef Name="AnlatimSekliId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Icerikler_Konular">
+          <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+          <End Role="Icerikler" Type="Self.Icerikler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konular">
+              <PropertyRef Name="KonuId" />
+            </Principal>
+            <Dependent Role="Icerikler">
+              <PropertyRef Name="KonuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Icerikler_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Icerikler" Type="Self.Icerikler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="Icerikler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciRol_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="KullaniciRol" Type="Self.KullaniciRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="KullaniciRol">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciRol_Roller">
+          <End Role="Roller" Type="Self.Roller" Multiplicity="0..1" />
+          <End Role="KullaniciRol" Type="Self.KullaniciRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roller">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="KullaniciRol">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="melihcelenkmainModelStoreContainer">
+          <EntitySet Name="AnlatimSekilleri" EntityType="Self.AnlatimSekilleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Icerikler" EntityType="Self.Icerikler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Konular" EntityType="Self.Konular" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciRol" EntityType="Self.KullaniciRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roller" EntityType="Self.Roller" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Icerikler_AnlatimSekilleri" Association="Self.FK_Icerikler_AnlatimSekilleri">
+            <End Role="AnlatimSekilleri" EntitySet="AnlatimSekilleri" />
+            <End Role="Icerikler" EntitySet="Icerikler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Icerikler_Konular" Association="Self.FK_Icerikler_Konular">
+            <End Role="Konular" EntitySet="Konular" />
+            <End Role="Icerikler" EntitySet="Icerikler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Icerikler_Kullanicilar" Association="Self.FK_Icerikler_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Icerikler" EntitySet="Icerikler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciRol_Kullanicilar" Association="Self.FK_KullaniciRol_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="KullaniciRol" EntitySet="KullaniciRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciRol_Roller" Association="Self.FK_KullaniciRol_Roller">
+            <End Role="Roller" EntitySet="Roller" />
+            <End Role="KullaniciRol" EntitySet="KullaniciRol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="melihcelenkmainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnlatimSekilleri">
+          <Key>
+            <PropertyRef Name="AnlatimSekliId" />
+          </Key>
+          <Property Name="AnlatimSekliId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnlatimSekliAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Icerikler" Relationship="Self.FK_Icerikler_AnlatimSekilleri" FromRole="AnlatimSekilleri" ToRole="Icerikler" />
+        </EntityType>
+        <EntityType Name="Icerikler">
+          <Key>
+            <PropertyRef Name="IcerikId" />
+          </Key>
+          <Property Name="IcerikId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IcerikAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GonderimTarihi" Type="DateTime" Precision="3" />
+          <Property Name="KonuId" Type="Int32" />
+          <Property Name="AnlatimSekliId" Type="Int32" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <NavigationProperty Name="AnlatimSekilleri" Relationship="Self.FK_Icerikler_AnlatimSekilleri" FromRole="Icerikler" ToRole="AnlatimSekilleri" />
+          <NavigationProperty Name="Konular" Relationship="Self.FK_Icerikler_Konular" FromRole="Icerikler" ToRole="Konular" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Icerikler_Kullanicilar" FromRole="Icerikler" ToRole="Kullanicilar" />
+        </EntityType>
+        <EntityType Name="Konular">
+          <Key>
+            <PropertyRef Name="KonuId" />
+          </Key>
+          <Property Name="KonuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KonuAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Icerikler" Relationship="Self.FK_Icerikler_Konular" FromRole="Konular" ToRole="Icerikler" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Parola" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OlusturulmaTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Icerikler" Relationship="Self.FK_Icerikler_Kullanicilar" FromRole="Kullanicilar" ToRole="Icerikler" />
+          <NavigationProperty Name="KullaniciRol" Relationship="Self.FK_KullaniciRol_Kullanicilar" FromRole="Kullanicilar" ToRole="KullaniciRol" />
+        </EntityType>
+        <EntityType Name="KullaniciRol">
+          <Key>
+            <PropertyRef Name="KullaniciRolID" />
+          </Key>
+          <Property Name="KullaniciRolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <Property Name="RolID" Type="Int32" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_KullaniciRol_Kullanicilar" FromRole="KullaniciRol" ToRole="Kullanicilar" />
+          <NavigationProperty Name="Roller" Relationship="Self.FK_KullaniciRol_Roller" FromRole="KullaniciRol" ToRole="Roller" />
+        </EntityType>
+        <EntityType Name="Roller">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolAdi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="KullaniciRol" Relationship="Self.FK_KullaniciRol_Roller" FromRole="Roller" ToRole="KullaniciRol" />
+        </EntityType>
+        <Association Name="FK_Icerikler_AnlatimSekilleri">
+          <End Role="AnlatimSekilleri" Type="Self.AnlatimSekilleri" Multiplicity="0..1" />
+          <End Role="Icerikler" Type="Self.Icerikler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnlatimSekilleri">
+              <PropertyRef Name="AnlatimSekliId" />
+            </Principal>
+            <Dependent Role="Icerikler">
+              <PropertyRef Name="AnlatimSekliId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Icerikler_Konular">
+          <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+          <End Role="Icerikler" Type="Self.Icerikler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konular">
+              <PropertyRef Name="KonuId" />
+            </Principal>
+            <Dependent Role="Icerikler">
+              <PropertyRef Name="KonuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Icerikler_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Icerikler" Type="Self.Icerikler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="Icerikler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciRol_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="KullaniciRol" Type="Self.KullaniciRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="KullaniciRol">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciRol_Roller">
+          <End Role="Roller" Type="Self.Roller" Multiplicity="0..1" />
+          <End Role="KullaniciRol" Type="Self.KullaniciRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roller">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="KullaniciRol">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="melihcelenkmainEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnlatimSekilleri" EntityType="Self.AnlatimSekilleri" />
+          <EntitySet Name="Icerikler" EntityType="Self.Icerikler" />
+          <EntitySet Name="Konular" EntityType="Self.Konular" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" />
+          <EntitySet Name="KullaniciRol" EntityType="Self.KullaniciRol" />
+          <EntitySet Name="Roller" EntityType="Self.Roller" />
+          <AssociationSet Name="FK_Icerikler_AnlatimSekilleri" Association="Self.FK_Icerikler_AnlatimSekilleri">
+            <End Role="AnlatimSekilleri" EntitySet="AnlatimSekilleri" />
+            <End Role="Icerikler" EntitySet="Icerikler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Icerikler_Konular" Association="Self.FK_Icerikler_Konular">
+            <End Role="Konular" EntitySet="Konular" />
+            <End Role="Icerikler" EntitySet="Icerikler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Icerikler_Kullanicilar" Association="Self.FK_Icerikler_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Icerikler" EntitySet="Icerikler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciRol_Kullanicilar" Association="Self.FK_KullaniciRol_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="KullaniciRol" EntitySet="KullaniciRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciRol_Roller" Association="Self.FK_KullaniciRol_Roller">
+            <End Role="Roller" EntitySet="Roller" />
+            <End Role="KullaniciRol" EntitySet="KullaniciRol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="melihcelenkmainModelStoreContainer" CdmEntityContainer="melihcelenkmainEntities">
+          <EntitySetMapping Name="AnlatimSekilleri">
+            <EntityTypeMapping TypeName="melihcelenkmainModel.AnlatimSekilleri">
+              <MappingFragment StoreEntitySet="AnlatimSekilleri">
+                <ScalarProperty Name="AnlatimSekliId" ColumnName="AnlatimSekliId" />
+                <ScalarProperty Name="AnlatimSekliAdi" ColumnName="AnlatimSekliAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Icerikler">
+            <EntityTypeMapping TypeName="melihcelenkmainModel.Icerikler">
+              <MappingFragment StoreEntitySet="Icerikler">
+                <ScalarProperty Name="IcerikId" ColumnName="IcerikId" />
+                <ScalarProperty Name="IcerikAd" ColumnName="IcerikAd" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="GonderimTarihi" ColumnName="GonderimTarihi" />
+                <ScalarProperty Name="KonuId" ColumnName="KonuId" />
+                <ScalarProperty Name="AnlatimSekliId" ColumnName="AnlatimSekliId" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Konular">
+            <EntityTypeMapping TypeName="melihcelenkmainModel.Konular">
+              <MappingFragment StoreEntitySet="Konular">
+                <ScalarProperty Name="KonuId" ColumnName="KonuId" />
+                <ScalarProperty Name="KonuAdi" ColumnName="KonuAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicilar">
+            <EntityTypeMapping TypeName="melihcelenkmainModel.Kullanicilar">
+              <MappingFragment StoreEntitySet="Kullanicilar">
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Parola" ColumnName="Parola" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="OlusturulmaTarihi" ColumnName="OlusturulmaTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciRol">
+            <EntityTypeMapping TypeName="melihcelenkmainModel.KullaniciRol">
+              <MappingFragment StoreEntitySet="KullaniciRol">
+                <ScalarProperty Name="KullaniciRolID" ColumnName="KullaniciRolID" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roller">
+            <EntityTypeMapping TypeName="melihcelenkmainModel.Roller">
+              <MappingFragment StoreEntitySet="Roller">
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="RolAdi" ColumnName="RolAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
