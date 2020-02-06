@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Ana Sayfa";
+}
+@model EgitimPlatformu.Models.Icerikler
+<section id="contentbody">
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-12 col-md-8 col-lg-8">
+                <div class="row">
+                    <div class="leftbar_content">
+                        <h2>İçerik Detayı</h2>
+
+                     
+
+
+                            <div class="single_stuff wow fadeInDown">
+                                <div class="single_stuff_img"> <a href="#"><img style="width:100%;" src="~/images/arkaplan.jpg" alt=""></a> </div>
+                                <div class="single_stuff_article">
+                                    <div class="single_sarticle_inner">
+                                        <a class="stuff_category" href="#"><b>Konu:</b> @Model.Konular.KonuAdi</a>
+                                        <div class="stuff_article_inner">
+                                            <span class="stuff_date"> @Model.GonderimTarihi.Value.Month / <strong>@Model.GonderimTarihi.Value.Day</strong></span>
+                                            <h2><a href="#">@Model.IcerikAd</a></h2>
+                                            <p>
+                                                @Model.Aciklama
+                                            </p>
+                                            <b>Anlatım Şekli:</b> @Model.AnlatimSekilleri.AnlatimSekliAdi | <b>Yazar:</b> @Model.Kullanicilar.KullaniciAdi
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="row">
+                    <div class="rightbar_content">
+                        <div class="single_blog_sidebar wow fadeInUp">
+                            <h2>Reklamlar</h2>
+                            <ul class="featured_nav">
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

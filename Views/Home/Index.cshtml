@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Ana Sayfa";
+}
+@model EgitimPlatformu.Controllers.AnasayfaDTO
+<section id="contentbody">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="leftbar_content">
+                        <h2>En Yeni İçerikler</h2>
+
+                        @foreach (var item in Model.icerik){
+                       
+                        <div class="single_stuff wow fadeInDown">
+                            <div class="single_stuff_img"> <a href="#"><img src="~/images/arkaplan.jpg" alt=""></a> </div>
+                            <div class="single_stuff_article">
+                                <div class="single_sarticle_inner">
+                                    <a class="stuff_category" href="#"><b>Konu:</b> @item.Konular.KonuAdi</a>
+                                    <div class="stuff_article_inner">
+                                        <span class="stuff_date"> @item.GonderimTarihi.Value.Month / <strong>@item.GonderimTarihi.Value.Day</strong></span>
+                                        <h2><a href="~/Home/Icerik?id=@item.IcerikId">@item.IcerikAd</a></h2>
+                                        <p>
+                                            @if (item.Aciklama.Length >= 200)
+                                        { 
+                                            @item.Aciklama.Substring(0, 200)
+                                        }
+                                            else { @item.Aciklama  }...
+                                        </p>
+                                        <b>Anlatım Şekli:</b> @item.AnlatimSekilleri.AnlatimSekliAdi | <b>Yazar:</b> @item.Kullanicilar.KullaniciAdi
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <div class="row">
+                    <div class="middlebar_content">
+                        <h2 class="yellow_bg">Yeni Üyeler</h2>
+                        <div class="middlebar_content_inner wow fadeInUp">
+                            <ul class="middlebar_nav">
+                                @foreach (var item in Model.kullanici) {
+                                <li> <a class="mbar_thubnail" href="~/Home/Profil?username=@item.KullaniciAdi"><img src="~/images/profile.png" alt=""></a> <a class="mbar_title" href="~/Home/Profil?username=@item.KullaniciAdi"><b>@item.KullaniciAdi</b></a> <br />@item.AdSoyad <br /> @foreach (var i in @item.KullaniciRol) { @i.Roller.RolAdi; <i> </i> }</li>
+                                }
+                            </ul>
+                        </div>
+                        @*<div class="popular_categori  wow fadeInUp">
+                            <h2 class="limeblue_bg">Most Popular Categories</h2>
+                            <ul class="poplr_catgnva">
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Gallery</a></li>
+                                <li><a href="#">Life &amp; Style</a></li>
+                                <li><a href="#">Games</a></li>
+                                <li><a href="#">Slider</a></li>
+                                <li><a href="#">Sports</a></li>
+                            </ul>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="row">
+                    <div class="rightbar_content">
+                        <div class="single_blog_sidebar wow fadeInUp">
+                            <h2>Reklamlar</h2>
+                            <ul class="featured_nav">
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                                <li>
+                                    <a class="featured_img" href="#"><img src="~/images/featured_img1.jpg" alt=""></a>
+                                    <div class="featured_title"> <a class="" href="#">Sed luctus semper odio aliquam rhoncus</a> </div>
+                                </li>
+                            </ul>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

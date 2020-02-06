@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Üye Ol";
+}
+@model EgitimPlatformu.Controllers.AnasayfaDTO
+<section id="contentbody">
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="leftbar_content">
+                        <h2>@ViewBag.Title</h2>
+
+                        <div class="singlepost_content">
+                           
+                            <form action="~/UyeOl/Index" method="post">
+                                <label>Kullanıcı Adı:</label>
+                                <br />
+                                <input type="text" name="KullaniciAdi" class="form-control"/>
+                                <br />
+                                <label>Ad Soyad:</label>
+                                <br />
+                                <input type="text" name="AdSoyad" class="form-control"/>
+                                <br />
+                                <label>Parola:</label>
+                                <br />
+                                <input type="password" name="Parola" class="form-control"/>
+                                <br /><br />
+                                <input type="submit" value="Kaydet" class="form-control btn btn-success"/>
+                                
+                            </form>
+               
+
+
+
+                        </div>
+
+                    
+                       
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-4">
+               
+            </div>
+        </div>
+    </div>
+</section>

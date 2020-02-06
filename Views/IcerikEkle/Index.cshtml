@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "İçerik Ekle";
+}
+@model EgitimPlatformu.Controllers.AnasayfaDTO
+<section id="contentbody">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="leftbar_content">
+                        <h2>@ViewBag.Title</h2>
+
+                        <div class="singlepost_content">
+                           
+                            <form action="~/IcerikEkle/Index" method="post" id="icerikformu">
+                                <label>Başlık</label>
+                                <br />
+                                <input type="text" name="IcerikAd" class="form-control"/>
+                                <br />
+                                <label>Açıklama</label>
+                                <br />
+                                <textarea rows="4" cols="60" name="Aciklama" form="icerikformu"></textarea>
+                                <br />
+                                <label>Konu</label>
+                                <br />
+                                @foreach (var i in Model.konular)
+                                {
+                                    <input type="radio" class="radio-inline" name="KonuAdi" value="@i.KonuAdi" /> @i.KonuAdi.ToString()
+                                }
+                                <br /><br />
+                                <label>Anlatım Şekli</label>
+                                <br />
+                                @foreach (var i in Model.anlatim)
+                                {
+                                    <input type="radio" class="radio-inline" name="AnlatimSekliAdi" value="@i.AnlatimSekliAdi" /> @i.AnlatimSekliAdi.ToString()
+                                }
+                                <br /><br />
+
+                                <input type="submit" value="Kaydet" class="form-control btn btn-success"/>
+                                
+                            </form>
+               
+
+
+
+                        </div>
+
+                    
+                       
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-4">
+               
+            </div>
+        </div>
+    </div>
+</section>

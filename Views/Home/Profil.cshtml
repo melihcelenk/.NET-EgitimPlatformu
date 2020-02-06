@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Profil";
+}
+@model EgitimPlatformu.Models.Kullanicilar
+    
+<section id="contentbody">
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="leftbar_content">
+                        <h2>@ViewBag.Title</h2>
+
+                        <div class="singlepost_content">
+                            <ul>
+                                
+                                <li><b>Kullanıcı Adı:</b> @Model.KullaniciAdi</li>
+                                <br />
+                                <li><b>Ad Soyad: </b> @Model.AdSoyad</li>
+                                <br />
+                                <li>
+                                    <b>Kullanıcı Tipleri: </b>
+                                    @foreach (var i in @Model.KullaniciRol.ToList())
+                                    {
+                                        @i.Roller.RolAdi
+                                    }
+                                    
+                                </li><br />
+                                <li><b>Kayıt Tarihi:</b> @Model.OlusturulmaTarihi</li>
+                            </ul>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+               
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-4">
+               
+            </div>
+        </div>
+    </div>
+</section>
